@@ -31,7 +31,7 @@ public class Product {
     @Column(name = "author")
     private String author;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "product")
 
     private List<Image> images =new ArrayList<>();
 
@@ -50,7 +50,18 @@ public class Product {
 
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", city='" + city + '\'' +
+                ", author='" + author + '\'' +
+                ", images=" + images.getClass().toString() +
+                ", previewImageId=" + previewImageId +
+                ", dateOfCreated=" + dateOfCreated +
+                '}';
+    }
 }

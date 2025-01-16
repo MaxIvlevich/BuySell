@@ -24,7 +24,7 @@
 <h3>
     Создать новый товар
 </h3>
-<form action="/product/create" method="post">
+<form action="/product/create" method="post" enctype="multipart/form-data">
     Название обьявления: <input type="text" name="title"><br><br>
     Описание обьявления: <input type="text" name="description"><br><br>
     Цена: <input type="number" name="price"><br><br>
@@ -33,6 +33,7 @@
     Первай фотография: <input type="file" name = "file1"/><br><br>
     Первай фотография: <input type="file" name = "file2"/><br><br>
     Первай фотография: <input type="file" name = "file3"/><br><br>
+
     <input type="submit" value="Добавить товар"/>
 </form>
 </body>

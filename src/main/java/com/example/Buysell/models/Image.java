@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -34,8 +35,19 @@ public class Image {
     private Product product;
 
 
-
-
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", Name='" + Name + '\'' +
+                ", originalFilename='" + originalFilename + '\'' +
+                ", size=" + size +
+                ", contentType='" + contentType + '\'' +
+                ", isPreviewImage=" + isPreviewImage +
+                ", bytes=" + Arrays.toString(bytes) +
+                ", product=" + product +
+                '}';
+    }
 }
 
 
