@@ -5,6 +5,7 @@ import com.example.Buysell.models.User;
 import com.example.Buysell.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user){
         String email = user.getEmail();
@@ -19,6 +21,7 @@ public class UserService {
             return false;
         }
         user.setActive(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(Role.ROLE_USER);
         log.info("Seving new User with email: {}",email);
 

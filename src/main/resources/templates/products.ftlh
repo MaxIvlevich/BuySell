@@ -4,7 +4,7 @@
     <title>BUYSELL</title>
 </head>
 <body>
-<h1>BUYSELL</h1><hr>
+<h1>BUYSELL <a href = "/login">Войти</a></h1><hr>
 <h4>Товары со всей России</h4>
 <form action="/" method="get">
     Поиск по названию обьявления : <label>
