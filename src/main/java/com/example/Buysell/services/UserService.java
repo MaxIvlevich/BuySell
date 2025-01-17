@@ -21,10 +21,11 @@ public class UserService {
             return false;
         }
         user.setActive(true);
+        user.getRoles().add(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(Role.ROLE_USER);
         log.info("Seving new User with email: {}",email);
-
+        userRepository.save(user);
         return true;
 
     }

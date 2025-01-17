@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>BUYSELL <a href = "/login">Войти</a></h1><hr>
+<a href = "/registrationn">Зарегистрироваться</a></h1><hr>
 <h4>Товары со всей России</h4>
 <form action="/" method="get">
     Поиск по названию обьявления : <label>
