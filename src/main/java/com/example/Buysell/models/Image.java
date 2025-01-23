@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Image {
     @Id
-    @GeneratedValue(strategy =GenerationType.AUTO )
+    @GeneratedValue(strategy = GenerationType.AUTO )
     @Column(name = "id")
     private Long id;
     @Column(name = "Name")

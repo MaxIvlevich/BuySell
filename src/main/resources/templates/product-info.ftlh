@@ -14,18 +14,18 @@
 <b> Описание  :</b>${product.description}<br><br>
 <b> Цена  :</b>${product.price}<br><br>
 <b> Город  :</b>${product.city}<br><br>
-<b> Автор :</b>${product.author}<br><br>
-
+<b> Автор :</b>${product.user.name}<br><br>
+<b> Номер телефона :</b>${product.user.phoneNumber}<br><br>
 
 <hr>
-
-    <form action="/product/delete/${product.id}" method="post">
+<#if user.email??>
+<#if user.email == product.user.email>
+<form action="/product/delete/${product.id}" method="post">
+    <input type="hidden" name="_csrf" value="{csrfToken}">
     <input type="submit" value="Удалить товар"/>
-    </form>
+</form>
+</#if>
+</#if>
 <hr>
-     <form action="/product/back" method="get">
-     <input type="submit" value="Вернуться"/>
-     </form>
-
 </body>
 </html>
