@@ -30,13 +30,11 @@ public class Product {
     @Column(name = "city")
     private String city;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "product")
-
-    private List<Image> images =new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
 
     private long previewImageId;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH ,fetch = FetchType.EAGER)
     @JoinColumn
-    @ToString.Exclude
     private User user;
 
     private LocalDateTime dateOfCreated;
@@ -60,8 +58,9 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", city='" + city + '\'' +
-                ", images=" + images.getClass().toString() +
+//                ", images=" + images.getClass().toString() +
                 ", previewImageId=" + previewImageId +
+//                ", user" + user.getClass().toString() +
                 ", dateOfCreated=" + dateOfCreated +
                 '}';
     }

@@ -7,7 +7,9 @@ import com.example.Buysell.repositories.ProductRepository;
 import com.example.Buysell.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -29,7 +32,7 @@ public class ProductService {
         if (title != null) {
             return productRepository.findByTitle(title);
         }
-        return productRepository.findAll();
+        return (List<Product>) productRepository.findAll();
     }
 
     public void saveProduct(Principal principal ,Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) {
@@ -42,6 +45,7 @@ public class ProductService {
             image1 = toImageEntity(file1);
             image1.setIsPreviewImage(true);
             product.addImageToProduct(image1);
+
             }
         if (file2.getSize() != 0) {
             image2 = toImageEntity(file2);
@@ -51,13 +55,11 @@ public class ProductService {
             image3 = toImageEntity(file3);
             product.addImageToProduct(image3);
         }
-
-
+        Product productFromDb = productRepository.save(product);
+        product.setPreviewImageId(productFromDb.getImages().get(0).getId());
 
         log.info("Saving new Product. Title: {}; Author email : {}", product.getTitle(),product.getUser().getEmail());
-        Product productFromDb = productRepository.save(product);
-        productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
-        
+
         productRepository.save(product);
 
         }
@@ -85,17 +87,20 @@ public class ProductService {
             return image;
 
         }
-
+        @Transactional
         public void deleteProduct (Long id){
-             log.info("Delete product {}", productRepository.findById(id));
-             productRepository.deleteById(id);
+
+        log.info("Delete product {}", productRepository.findById(id));
+              productRepository.deleteById(id);
+
+
              if(productRepository.findById(id).isPresent()){
                  log.info("Не получилось удалить товар {}", productRepository.findById(id));
              }else {
                  log.info("Товар удален");
+
              }
         }
-
         public Product getProductById (Long id){
         return productRepository.findById(id).orElse(null);
         }

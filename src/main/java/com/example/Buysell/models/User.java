@@ -35,7 +35,7 @@ public class User implements UserDetails {
     joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "user")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,mappedBy = "user")
     private List<Product> products= new ArrayList<>();
     private LocalDateTime dateOfCreated;
 
@@ -78,20 +78,20 @@ public class User implements UserDetails {
     }
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", name='" + name + '\'' +
-                ", active=" + active +
-                ", avatar=" + avatar +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                ", products=" + products.toString() +
-                ", dateOfCreated=" + dateOfCreated +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", email='" + email + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", name='" + name + '\'' +
+//                ", active=" + active +
+//                ", avatar=" + avatar +
+//                ", password='" + password + '\'' +
+//                ", roles=" + roles +
+//                ", products=" + products.toString() +
+//                ", dateOfCreated=" + dateOfCreated +
+//                '}';
+//    }
 }
 
