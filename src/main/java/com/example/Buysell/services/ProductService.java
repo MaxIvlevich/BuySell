@@ -93,13 +93,11 @@ public class ProductService {
         log.info("Delete product {}", productRepository.findById(id));
               productRepository.deleteById(id);
 
-
-             if(productRepository.findById(id).isPresent()){
+              if(productRepository.findById(id).isPresent()){
                  log.info("Не получилось удалить товар {}", productRepository.findById(id));
              }else {
                  log.info("Товар удален");
-
-             }
+              }
         }
         public Product getProductById (Long id){
         return productRepository.findById(id).orElse(null);

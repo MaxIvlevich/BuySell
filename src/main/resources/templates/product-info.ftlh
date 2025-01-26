@@ -14,8 +14,8 @@
 <b> Описание  :</b>${product.description}<br><br>
 <b> Цена  :</b>${product.price}<br><br>
 <b> Город  :</b>${product.city}<br><br>
-<b> Автор :</b>${product.user.name}<br><br>
-<b> Номер телефона :</b>${product.user.phoneNumber}<br><br>
+<b> Автор :</b><a href="/user/${product.user.id}"> ${product.user.name}</a><br><br>
+
 
 <hr>
 <#if user.email??>

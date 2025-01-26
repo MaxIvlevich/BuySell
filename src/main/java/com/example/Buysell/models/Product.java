@@ -33,7 +33,7 @@ public class Product {
     private List<Image> images = new ArrayList<>();
 
     private long previewImageId;
-    @ManyToOne(cascade = CascadeType.REFRESH ,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH ,fetch = FetchType.EAGER)//CascadeType.REFRESH
     @JoinColumn
     private User user;
 

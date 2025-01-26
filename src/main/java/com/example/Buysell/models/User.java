@@ -25,7 +25,7 @@ public class User implements UserDetails {
     private String name;
     @Column(name = "ative")
     private boolean active;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER) // CascadeType.ALL
     @JoinColumn(name = "image_id")
     private Image avatar;
     @Column(name = "password", length = 1000)
@@ -35,7 +35,7 @@ public class User implements UserDetails {
     joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,mappedBy = "user")
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,mappedBy = "user") // CascadeType.REFRESH
     private List<Product> products= new ArrayList<>();
     private LocalDateTime dateOfCreated;
 
@@ -45,6 +45,9 @@ public class User implements UserDetails {
     private void init() {
         dateOfCreated = LocalDateTime.now();
 
+    }
+    public boolean idAdmin(){
+        return  roles.contains(Role.ROLE_ADMIN);
     }
 
     @Override
