@@ -35,8 +35,8 @@ public class Product {
     private List<Image> images = new ArrayList<>();
 
     private long previewImageId;
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)//CascadeType.REFRESH {CascadeType.REFRESH,CascadeType.REMOVE.,CascadeType.MERGE}
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)//CascadeType.REFRESH {CascadeType.REFRESH,CascadeType.REMOVE.,CascadeType.MERGE}
+    @JoinColumn(updatable=false)
     private User user;
 
     private LocalDateTime dateOfCreated;

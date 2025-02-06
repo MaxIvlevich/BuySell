@@ -26,7 +26,7 @@
 </form>
 <#list products as product>
     <div>
-        <p><b>${product.title}</b>${product.price} руб. | <a href="/product/${product.id}">Подробнее...</a></p>
+        <p><b>${product.title}</b>${product.price} руб. | <a href="/product/${product.id?c}">Подробнее...</a></p>
     </div>
     <#else>
     <h3> Товаров нет </h3>

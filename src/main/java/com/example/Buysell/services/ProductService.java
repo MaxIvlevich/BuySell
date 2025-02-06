@@ -89,9 +89,11 @@ public class ProductService {
         }
 
         public void deleteProduct (Long id){
+            log.info("Delete product with id  = {}",id);
 
-        log.info("Delete product {}", productRepository.findById(id));
+//        log.info("Delete product {}", productRepository.findById(id));
               productRepository.deleteById(id);
+
 
               if(productRepository.findById(id).isPresent()){
                  log.info("Не получилось удалить товар {}", productRepository.findById(id));

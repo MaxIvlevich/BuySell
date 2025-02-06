@@ -33,7 +33,8 @@ public class Image {
     @Lob
     private byte[] bytes;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY) //  FetchType.EAGER
+    @ManyToOne(fetch = FetchType.EAGER) //  FetchType.EAGER cascade = CascadeType.ALL,
+    @JoinColumn(updatable=false)
     private Product product;
 
 
