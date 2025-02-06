@@ -17,7 +17,7 @@ public class UserController {
     private final UserService userService;
     @GetMapping("/registration")
     public String registration(){
-        return "registration";
+        return "/registration";
 
     }
     @GetMapping("/login")
@@ -36,6 +36,10 @@ public class UserController {
         model.addAttribute("products",user.getProducts());
         return "user-info";
 
+    }
+    @GetMapping("/logout")
+    public String logout(){
+        return "login";
     }
 
 

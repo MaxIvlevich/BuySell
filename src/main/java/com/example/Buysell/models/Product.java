@@ -9,7 +9,9 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -33,7 +35,7 @@ public class Product {
     private List<Image> images = new ArrayList<>();
 
     private long previewImageId;
-    @ManyToOne(cascade = CascadeType.REFRESH ,fetch = FetchType.EAGER)//CascadeType.REFRESH
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)//CascadeType.REFRESH {CascadeType.REFRESH,CascadeType.REMOVE.,CascadeType.MERGE}
     @JoinColumn
     private User user;
 

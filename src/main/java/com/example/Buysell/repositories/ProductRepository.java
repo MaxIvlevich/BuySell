@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductRepository extends CrudRepository<Product,Long> {
+public interface ProductRepository extends JpaRepository<Product,Long> {
 
     List<Product> findByTitle(String title);
 

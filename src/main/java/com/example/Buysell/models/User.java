@@ -35,8 +35,8 @@ public class User implements UserDetails {
     joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,mappedBy = "user") // CascadeType.REFRESH
-    private List<Product> products= new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "user") // CascadeType.REFRESH{CascadeType.MERGE,CascadeType.REFRESH,
+    private List<Product> products = new ArrayList<>();
     private LocalDateTime dateOfCreated;
 
 

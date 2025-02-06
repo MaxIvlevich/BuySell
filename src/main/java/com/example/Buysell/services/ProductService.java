@@ -87,7 +87,7 @@ public class ProductService {
             return image;
 
         }
-        @Transactional
+
         public void deleteProduct (Long id){
 
         log.info("Delete product {}", productRepository.findById(id));

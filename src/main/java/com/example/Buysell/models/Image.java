@@ -33,7 +33,7 @@ public class Image {
     @Lob
     private byte[] bytes;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY) //изменил каскад тайп на REFRESH  FetchType.EAGER
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY) //  FetchType.EAGER
     private Product product;
 
 
