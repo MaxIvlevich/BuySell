@@ -6,22 +6,26 @@
 <body>
 <h1>BUYSELL</h1><hr>
 <h4>Подробная информация о товаре</h4>
+<#list images as img>
+    <img src="/images/${img.id?c}" height="60px"><br><br>
+</#list>
+
 <b> Название  :</b>${product.title}<br><br>
 <b> Описание  :</b>${product.description}<br><br>
 <b> Цена  :</b>${product.price}<br><br>
 <b> Город  :</b>${product.city}<br><br>
-<b> Автор :</b>${product.author}<br><br>
+<b> Автор :</b><a href="/user/${product.user.id?c}"> ${product.user.name}</a><br><br>
 
 
 <hr>
-
-    <form action="/product/delete/${product.id}" method="post">
+<#if user.email??>
+<#if user.email == product.user.email>
+<form action="/product/delete/${product.id?c}" method="post">
+    <input type="hidden" name="_csrf" value="{csrfToken}">
     <input type="submit" value="Удалить товар"/>
-    </form>
+</form>
+</#if>
+</#if>
 <hr>
-     <form action="/product/back" method="get">
-     <input type="submit" value="Вернуться"/>
-     </form>
-
 </body>
 </html>

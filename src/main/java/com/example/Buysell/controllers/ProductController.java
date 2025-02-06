@@ -2,6 +2,7 @@ package com.example.Buysell.controllers;
 
 import com.example.Buysell.models.Product;
 import com.example.Buysell.services.ProductService;
+import com.example.Buysell.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,44 +13,54 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final UserService userService;
 
-    @GetMapping("/product/back")
-    public String back() {
-        return "redirect:/";
 
-    }
+ // @GetMapping("/product/back")
+ // public String back() {
+ //     return "redirect:/";
+
+ // }
+//    <form action="/product/back" method="get">
+//    <input type="submit" value="Вернуться"/>
+//    </form>
 
     @GetMapping("/")
-    public String products(@RequestParam(name = "title", required = false) String title, Model model) {
+    public String products(@RequestParam(name = "title", required = false) String title,Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts(title));
+        model.addAttribute("user",productService.getUserByPrincipal(principal));
         return "products";
 
     }
 
     @GetMapping("/product/{id}")
-    public String productInfo(@PathVariable Long id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
+    public String productInfo(@PathVariable Long id, Model model,Principal principal) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        model.addAttribute("images",product.getImages());
+        model.addAttribute("user",productService.getUserByPrincipal(principal));
 
         return "product-info";
 
     }
 
-    @PostMapping("product/create")
+    @PostMapping("/product/create")
     public String createProduct(@RequestParam("file1") MultipartFile  file1 ,
-                                @RequestParam("file1") MultipartFile  file2 ,
-                                @RequestParam("file1") MultipartFile  file3 ,
-                                Product product) throws IOException {
-        productService.saveProduct(product,file1,file2,file3);
+                                @RequestParam("file2") MultipartFile  file2 ,
+                                @RequestParam("file3") MultipartFile  file3 ,
+                                Product product, Principal principal) throws IOException {
+        productService.saveProduct(principal,product,file1,file2,file3);
         return "redirect:/";
 
     }
 
-    @PostMapping("product/delete/{id}")
+    @PostMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return "redirect:/";
