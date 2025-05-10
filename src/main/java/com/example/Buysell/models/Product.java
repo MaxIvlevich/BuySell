@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,14 +29,13 @@ public class Product {
     private int price;
     @Column(name = "city")
     private String city;
-    @Column(name = "author")
-    private String author;
-
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "product")
-
-    private List<Image> images =new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "product")
+    private List<Image> images = new ArrayList<>();
 
     private long previewImageId;
+    @ManyToOne(cascade = CascadeType.REFRESH ,fetch = FetchType.EAGER)
+    @JoinColumn
+    private User user;
 
     private LocalDateTime dateOfCreated;
     @PrePersist
@@ -50,7 +50,18 @@ public class Product {
 
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", city='" + city + '\'' +
+//                ", images=" + images.getClass().toString() +
+                ", previewImageId=" + previewImageId +
+//                ", user" + user.getClass().toString() +
+                ", dateOfCreated=" + dateOfCreated +
+                '}';
+    }
 }
